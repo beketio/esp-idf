@@ -41,6 +41,8 @@ const char *dump_rc_notification_event_id(UINT8 event_id);
 const char *dump_rc_pdu(UINT8 pdu);
 #endif
 
+const char* dump_hd_event(uint16_t event);
+
 #if(BTA_AG_INCLUDED == TRUE)
 const char *dump_hf_conn_state(UINT16 event);
 const char *dump_hf_event(UINT16 event);

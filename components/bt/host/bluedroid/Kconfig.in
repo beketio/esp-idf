@@ -99,6 +99,13 @@ config BT_HFP_WBS_ENABLE
         This enables Wide Band Speech. Should disable it when SCO data path is PCM.
         Otherwise there will be no data transmited via GPIOs.
 
+config BT_HID_DEV_ENABLED
+    bool "Classic BT HID Device"
+    depends on BT_CLASSIC_ENABLED
+    default n
+    help
+        This enables HID Device support.
+
 config BT_HID_HOST_ENABLED
     bool "Classic BT HID Host"
     depends on BT_CLASSIC_ENABLED
@@ -696,6 +703,41 @@ menu "BT DEBUG LOG LEVEL"
         default 4 if BT_LOG_HID_TRACE_LEVEL_EVENT
         default 5 if BT_LOG_HID_TRACE_LEVEL_DEBUG
         default 6 if BT_LOG_HID_TRACE_LEVEL_VERBOSE
+        default 2
+
+    choice BT_LOG_HIDD_TRACE_LEVEL
+        prompt "HIDD layer"
+        default BT_LOG_HIDD_TRACE_LEVEL_WARNING
+        depends on BT_BLUEDROID_ENABLED && !BT_STACK_NO_LOG
+        help
+            Define BT trace level for HID Device layer
+
+        config BT_LOG_HIDD_TRACE_LEVEL_NONE
+            bool "NONE"
+        config BT_LOG_HIDD_TRACE_LEVEL_ERROR
+            bool "ERROR"
+        config BT_LOG_HIDD_TRACE_LEVEL_WARNING
+            bool "WARNING"
+        config BT_LOG_HIDD_TRACE_LEVEL_API
+            bool "API"
+        config BT_LOG_HIDD_TRACE_LEVEL_EVENT
+            bool "EVENT"
+        config BT_LOG_HIDD_TRACE_LEVEL_DEBUG
+            bool "DEBUG"
+        config BT_LOG_HIDD_TRACE_LEVEL_VERBOSE
+            bool "VERBOSE"
+    endchoice
+
+    config BT_LOG_HIDD_TRACE_LEVEL
+        int
+        depends on BT_BLUEDROID_ENABLED
+        default 0 if BT_LOG_HIDD_TRACE_LEVEL_NONE
+        default 1 if BT_LOG_HIDD_TRACE_LEVEL_ERROR
+        default 2 if BT_LOG_HIDD_TRACE_LEVEL_WARNING
+        default 3 if BT_LOG_HIDD_TRACE_LEVEL_API
+        default 4 if BT_LOG_HIDD_TRACE_LEVEL_EVENT
+        default 5 if BT_LOG_HIDD_TRACE_LEVEL_DEBUG
+        default 6 if BT_LOG_HIDD_TRACE_LEVEL_VERBOSE
         default 2
 
     choice BT_LOG_APPL_TRACE_LEVEL

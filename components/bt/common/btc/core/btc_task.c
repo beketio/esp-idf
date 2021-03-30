@@ -53,6 +53,9 @@
 #if BTC_HF_CLIENT_INCLUDED
 #include "btc_hf_client.h"
 #endif  /* #if BTC_HF_CLIENT_INCLUDED */
+#if HID_DEV_INCLUDED == TRUE
+#include "btc_hd.h"
+#endif /* #if HID_DEV_INCLUDED */
 #endif /* #if CLASSIC_BT_INCLUDED */
 #endif
 
@@ -120,6 +123,9 @@ static const btc_func_t profile_tab[BTC_PID_NUM] = {
 #if BTC_HF_CLIENT_INCLUDED
     [BTC_PID_HF_CLIENT]   = {btc_hf_client_call_handler,  btc_hf_client_cb_handler},
 #endif  /* #if BTC_HF_CLIENT_INCLUDED */
+#if HID_DEV_INCLUDED
+    [BTC_PID_HD]          = {btc_hd_call_handler,          btc_hd_cb_handler      },
+#endif  /* #if HID_DEV_INCLUDED */
 #endif /* #if CLASSIC_BT_INCLUDED */
 #endif
 #if CONFIG_BLE_MESH
