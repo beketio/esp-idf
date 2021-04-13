@@ -53,7 +53,7 @@
 #endif
 
 #if (defined(HID_HOST_INCLUDED) && HID_HOST_INCLUDED == TRUE)
-#include "hidh_api.h"
+#include "stack/hidh_api.h"
 #endif
 
 #if (defined(HID_DEV_INCLUDED) && HID_DEV_INCLUDED == TRUE)
